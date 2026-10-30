@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { width: 360px; min-height: 480px; background-color: #ffffff; color: #171717; font-family: 'Funnel Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; display: flex; flex-direction: column; }
+      .credential-meta, #generatedPass, .badge-origin, code, pre { font-family: 'Space Mono', monospace !important; }
+      header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background-color: #FAFAFA; border-bottom: 1px solid #E5E5E5; }
+      .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: #171717; }
+      .brand-icon { width: 22px; height: 22px; border-radius: 6px; background: #008AD6; color: white; display: flex; align-items: center; justify-content: center; }
+      .btn-lock { background: #FFFFFF; border: 1px solid #E5E5E5; color: #737373; border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+      .btn-lock:hover { background: #F5F5F5; color: #171717; }
+      .view-container { flex: 1; padding: 18px; overflow-y: auto; }
+      .hidden { display: none !important; }
+      label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #737373; margin-bottom: 6px; }
+      input[type="text"], input[type="email"], input[type="password"] { width: 100%; background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 10px; color: #171717; padding: 10px 12px; font-size: 13px; outline: none; margin-bottom: 12px; font-family: 'Funnel Sans', sans-serif; transition: border-color 0.15s; }
+      input[type="password"] { font-family: 'Space Mono', monospace; }
+      input:focus { border-color: #008AD6; }
+      .btn-primary { width: 100%; background: #171717; color: #FFFFFF; border: none; border-radius: 10px; font-weight: 600; font-size: 13px; padding: 11px; cursor: pointer; transition: background 0.15s; font-family: 'Funnel Sans', sans-serif; }
+      .btn-primary:hover { background: #262626; }
+      .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+      .credential-card { background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+      .credential-title { font-weight: 700; color: #171717; font-size: 13px; margin-bottom: 4px; }
+      .credential-meta { font-size: 11px; color: #737373; margin-bottom: 10px; font-family: 'Space Mono', monospace; word-break: break-all; }
+      .btn-group { display: flex; gap: 6px; }
+      .btn-secondary { flex: 1; background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 8px; color: #171717; padding: 6px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Funnel Sans', sans-serif; }
+      .btn-secondary:hover { background: #F5F5F5; }
+      footer { padding: 12px 18px; background: #FAFAFA; border-top: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #737373; }
+      footer a { color: #008AD6; text-decoration: none; font-weight: 600; }
+      footer a:hover { text-decoration: underline; }
+      .badge-origin { display: inline-block; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 600; color: #008AD6; margin-bottom: 12px; word-break: break-all; background: #EBF5FB; padding: 4px 8px; border-radius: 6px; border: 1px solid #BCE1F5; }
+      .status-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #008AD6; background: #EBF5FB; border: 1px solid #BCE1F5; border-radius: 4px; padding: 2px 6px; text-transform: uppercase; }
+      .info-box { background: #FAFAFA; border: 1px solid #E5E5E5; border-radius: 10px; padding: 10px 12px; font-size: 11px; color: #737373; line-height: 1.4; margin-bottom: 14px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="7.5" cy="15.5" r="5.5"></circle>
+            <path d="m21 2-9.6 9.6"></path>
+            <path d="m15.5 7.5 3 3L22 7l-3-3"></path>
+          </svg>
+        </div>
+        <span>Keyhouse</span>
+      </div>
+      <button id="lockVaultBtn" class="btn-lock hidden" title="Lock Vault">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Lock</span>
+      </button>
+    </header>
+
+    <!-- Locked / Sign-In View -->
+    <div id="lockedView" class="view-container">
+      <div style="text-align: center; margin: 10px 0 18px;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: #EBF5FB; border: 1px solid #BCE1F5; color: #008AD6; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h3 style="font-size: 15px; font-weight: 700; color: #171717;">Log In to Keyhouse</h3>
+        <p style="color: #737373; font-size: 12px; margin-top: 4px;">Syncs with your Web Vault storage backend</p>
+      </div>
+
+      <div class="info-box">
+        Enter your account email and client passphrase to retrieve and decrypt your encrypted vault.
+      </div>
+
+      <label>Account Email</label>
+      <input type="email" id="emailInput" placeholder="user@gmail.com" value="jobachx31@gmail.com" />
+
+      <label>Vault Passphrase</label>
+      <div style="position: relative;">
+        <input type="password" id="passphraseInput" placeholder="Client passphrase" style="margin-bottom: 8px; padding-right: 36px;" />
+        <button type="button" id="togglePassEye" style="position: absolute; right: 10px; top: 12px; background: none; border: none; cursor: pointer; color: #737373; font-size: 12px;">
+          👁
+        </button>
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label style="font-size: 10px; color: #A3A3A3;">Connected Storage Backend</label>
+        <input type="text" id="apiOriginInput" value="https://ais-dev-co4gob4lg4iddfeaoxhusv-474810200924.europe-west2.run.app" style="font-size: 11px; font-family: monospace; padding: 6px 10px; color: #737373;" />
+      </div>
+
+      <button id="unlockBtn" class="btn-primary">Sign In & Unlock Vault</button>
+      <div id="unlockError" style="color: #DC2626; font-size: 11px; margin-top: 10px; text-align: center; line-height: 1.4;" class="hidden"></div>
+    </div>
+
+    <!-- Unlocked Logins View -->
+    <div id="unlockedView" class="view-container hidden">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid #E5E5E5; pb-3;">
+        <div>
+          <div style="font-size: 10px; text-transform: uppercase; font-weight: 700; color: #737373;">ACTIVE SITE</div>
+          <div id="currentOrigin" class="badge-origin" style="margin-top: 4px; margin-bottom: 0;">Detecting...</div>
+        </div>
+        <div class="status-pill">
+          <span>● Synced</span>
+        </div>
+      </div>
+
+      <div id="loginList"></div>
+    </div>
+
+    <footer>
+      <span>Zero-Knowledge AES-GCM</span>
+      <a href="https://ais-dev-co4gob4lg4iddfeaoxhusv-474810200924.europe-west2.run.app" target="_blank" id="openWebVault">Open Web Vault &rarr;</a>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

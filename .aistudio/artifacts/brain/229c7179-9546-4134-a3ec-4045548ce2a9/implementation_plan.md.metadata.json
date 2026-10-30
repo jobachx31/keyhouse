@@ -1,0 +1,6 @@
+{
+  "summary":  "Implementation plan for Databytes Keyhouse — a full-stack zero-knowledge password manager and Chrome extension with Google Sign-In, client-side PBKDF2/AES-GCM encryption, Express sync backend, and downloadable Manifest V3 package.",
+  "updatedAt":  "2026-10-29T16:24:23.823497417Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Databytes Keyhouse",
+  "description": "Zero-knowledge password manager and Chrome extension with Google Sign-In, client-side AES-256-GCM encryption, and secure encrypted vault synchronization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
